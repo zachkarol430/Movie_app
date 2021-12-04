@@ -48,7 +48,7 @@ rad=st.sidebar.radio("Navigation",["search","database"])
 
 # df = pd.DataFrame(movie_sheet())
 # df.fillna(0)
-# df = df.iloc[:,[0, 1,5,6]]
+# df = df.ilgit commit -m "initial commit"oc[:,[0, 1,5,6]]
 
 
 st.markdown("""
