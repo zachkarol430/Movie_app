@@ -5,7 +5,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from random_user_agent.user_agent import UserAgent
 from random_user_agent.params import SoftwareName, OperatingSystem
 from selenium.webdriver.common.proxy import Proxy,ProxyType
+import os
+from selenium import webdriver
 
+
+from random_user_agent.user_agent import UserAgent
+from random_user_agent.params import SoftwareName, OperatingSystem
 
 # proxy_list=[]
 #
@@ -25,16 +30,22 @@ from selenium.webdriver.common.proxy import Proxy,ProxyType
 path= "/Users/zachkarol/Downloads/chromedriver 2"
 s=Service(path)
 
-from selenium import webdriver
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 
 
-from random_user_agent.user_agent import UserAgent
-from random_user_agent.params import SoftwareName, OperatingSystem
+
+
+
+
+
+
 
 # you can also import SoftwareEngine, HardwareType, SoftwareType, Popularity from random_user_agent.params
 # you can also set number of user agents required by providing `limit` as parameter
 
-chrome_options = webdriver.ChromeOptions()
+
 
 
 
@@ -61,5 +72,6 @@ class requester:
 
 
 
+obj=requester()
 
-
+obj.get_url("https://signup.heroku.com/account")
