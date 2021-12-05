@@ -35,13 +35,6 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 
 
-
-
-
-
-
-
-
 # you can also import SoftwareEngine, HardwareType, SoftwareType, Popularity from random_user_agent.params
 # you can also set number of user agents required by providing `limit` as parameter
 

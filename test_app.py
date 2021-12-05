@@ -21,8 +21,6 @@ from main import movie_get
 
 
 
-
-
 @st.cache
 def movie_sheet():
     sheet = client.open("Movie_proj").sheet1
