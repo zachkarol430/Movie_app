@@ -28,7 +28,7 @@ from random_user_agent.params import SoftwareName, OperatingSystem
 #ADD DESIRED CAPBILITY IF WANT TO USE PROXY AGAIN> ADD TO DRIBER IN GET URL
 
 path= "/Users/zachkarol/Downloads/chromedriver 2"
-s=Service(str(os.environ.get('CHROMEDRIVER_PATH')))
+s=Service(os.environ.get('CHROMEDRIVER_PATH'))
 
 
 chrome_options = webdriver.ChromeOptions()
@@ -70,8 +70,3 @@ class requester:
         driver.get(url)
         return driver
 
-
-
-obj=requester()
-
-obj.get_url("https://signup.heroku.com/account")
