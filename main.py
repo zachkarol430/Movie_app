@@ -1,4 +1,3 @@
-import gspread
 from bs4 import BeautifulSoup
 import requests
 import time
@@ -107,6 +106,7 @@ class movie_get:
             return driver.find_elements(By.CLASS_NAME, "money")[2].text
         except:
             return "Na"
+
 
 
 #

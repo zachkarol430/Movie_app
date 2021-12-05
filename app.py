@@ -1,5 +1,4 @@
 import os
-import gspread
 import time
 import json
 import pygsheets
