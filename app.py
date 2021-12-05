@@ -23,14 +23,14 @@ from main import movie_get
 
 
 
-@st.cache
-def movie_sheet():
-    sheet = client.open("Movie_proj").sheet1
-    df = pd.DataFrame(sheet.get_all_records())
-    df = df.replace("", None)
-    df = df.replace(" ", None)
-    movie_data_frame = df.replace("NA", None)
-    return movie_data_frame
+# @st.cache
+# def movie_sheet():
+#     sheet = client.open("Movie_proj").sheet1
+#     df = pd.DataFrame(sheet.get_all_records())
+#     df = df.replace("", None)
+#     df = df.replace(" ", None)
+#     movie_data_frame = df.replace("NA", None)
+#     return movie_data_frame
 
 
 
@@ -44,9 +44,9 @@ rad=st.sidebar.radio("Navigation",["search","database"])
 
 #this removes index colums
 
-df = pd.DataFrame(movie_sheet())
-df.fillna(0)
-df = df.iloc[:,[0, 1,5,6]]
+# df = pd.DataFrame(movie_sheet())
+# df.fillna(0)
+# df = df.iloc[:,[0, 1,5,6]]
 
 
 st.markdown("""
@@ -63,11 +63,11 @@ table th:nth-child(1) {
 
 
 if rad=="search":
-    text_input = st.text_input("enter movie get director", "")
+    text_input = st.text_input("enter movie get director")
     movie = movie_get(str(text_input))
     ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
-    d = {"movie": [str(text_input)], "actor": [movie.get_actor()], "director": [movie.get_director()],
-             "box office": [movie.get_box_office()], "genre": ['/'.join(movie.get_genre())]}
+    d = {"movie": [str(text_input)], "actor": ["actor"], "director": [movie.get_director()],
+             "box office": [movie.get_box_office()], "genre": ["genre"]}
     df = pd.DataFrame(data=d)
     df.replace("Na", "unknown", inplace=True)
     df.replace("Na/NA", "unknown", inplace=True)
