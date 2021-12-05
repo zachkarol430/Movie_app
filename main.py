@@ -97,12 +97,15 @@ class movie_get:
         except:
             return "Na","Na"
     def get_box_office(self):
+        try:
             movie = ("+".join(self.movie.split(" ")))
             driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
             url = driver.find_element(By.XPATH, ".//a[@class='a-size-medium a-link-normal a-text-bold']").get_attribute(
                 "href")
             driver = obj.get_url(url)
             return driver.find_elements(By.CLASS_NAME, "money")[2].text
+        except:
+            return "NA"
 
 
 
