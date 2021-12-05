@@ -24,12 +24,12 @@ obj=requester()
 scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
 
-with open("/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json") as source:
+with open("movie.json") as source:
     info = json.load(source)
 creds = service_account.Credentials.from_service_account_info(info)
 
 # creds= ServiceAccountCredentials.from_json_keyfile_name("/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json", scope)
-client=pygsheets.authorize(service_account_file="/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json")
+client=pygsheets.authorize(service_account_file="movie.json")
 
 
 
