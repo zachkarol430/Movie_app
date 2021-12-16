@@ -64,14 +64,16 @@ table th:nth-child(1) {
 
 if rad=="search":
     text_input = st.text_input("enter movie get director")
-    if(text_input!=""): movie_text=text_input
-    movie = movie_get(str(movie_text))
-    ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
-    d = {"movie": [str(movie_text)], "actor": ["actor"], "director": [movie.get_director()],
-             "box office": ["box"]}
-    df = pd.DataFrame(data=d)
-    df.replace("Na", "unknown", inplace=True)
-    df.replace("Na/NA", "unknown", inplace=True)
-    st.table(df)
+    if(text_input==""):
+        st.write("enter movie")
+    else:
+        movie = movie_get(str(text_input))
+        ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
+        d = {"movie": [str(text_input)], "actor": ["actor"], "director": [movie.get_director()],
+                 "box office": [movie.get_box_office()]}
+        df = pd.DataFrame(data=d)
+        df.replace("Na", "unknown", inplace=True)
+        df.replace("Na/NA", "unknown", inplace=True)
+        st.table(df)
 if rad=="database":
     st.write("upcoming feature")
