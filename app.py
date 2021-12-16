@@ -64,9 +64,10 @@ table th:nth-child(1) {
 
 if rad=="search":
     text_input = st.text_input("enter movie get director")
-    movie = movie_get(str(text_input))
+    if(text_input!=""): movie_text=text_input
+    movie = movie_get(str(movie_text))
     ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
-    d = {"movie": [str(text_input)], "actor": ["actor"], "director": ["director"],
+    d = {"movie": [str(movie_text)], "actor": ["actor"], "director": [movie.get_director()],
              "box office": ["box"]}
     df = pd.DataFrame(data=d)
     df.replace("Na", "unknown", inplace=True)
