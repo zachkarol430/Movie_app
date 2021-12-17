@@ -107,7 +107,8 @@ class movie_get:
         except:
             return "NA"
     def test(self):
-        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + "actor")
+        movie = ("+".join(self.movie.split(" ")))
+        driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
         page=BeautifulSoup(driver.page_source, features="html.parser")
         return page
 
