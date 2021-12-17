@@ -106,12 +106,10 @@ class movie_get:
             return driver.find_elements(By.CLASS_NAME, "money")[2].text
         except:
             return "NA"
-    def get_director2(self):
-        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
-        element = driver.find_element(By.CLASS_NAME, "FLP8od")
-        element_text = element.text
+    def test(self):
+        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + "actor")
         page=BeautifulSoup(driver.page_source, features="html.parser")
-        return element_text
+        return page
 
 
 
