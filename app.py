@@ -60,7 +60,7 @@ table th:nth-child(1) {
 </style>
 """, unsafe_allow_html=True)
 
-
+st.clear
 
 if rad=="search":
     text_input = st.text_input("enter movie get director")
