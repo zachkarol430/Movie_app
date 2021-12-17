@@ -74,7 +74,7 @@ if rad=="search":
         df = pd.DataFrame(data=d)
         df.replace("Na", "unknown", inplace=True)
         df.replace("Na/NA", "unknown", inplace=True)
-        st.table(d)
+        # st.table(d)
         st.write(str(movie.test()))
 if rad=="database":
     st.write("upcoming feature")
