@@ -108,11 +108,14 @@ class movie_get:
             return "NA"
     def test(self):
         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
-        time.sleep(2)
-        element = driver.find_elements(By.CLASS_NAME, "JjtOHd")
-        element_text = element[0].text
-        driver.quit()
-        return element_text
+        page = BeautifulSoup(driver.page_source, "html.parser")
+        try:
+            actor = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")
+            actor = actor[0].text
+        except:
+            page = BeautifulSoup(driver.page_source, "html.parser")
+            actor = page.select('.JjtOHd')[0].text.strip()
+        return actor
 
 
 
