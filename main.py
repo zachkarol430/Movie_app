@@ -110,7 +110,7 @@ class movie_get:
         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
             # element = driver.find_element(By.CLASS_NAME, "FLP8od")
             # element_text = element.text
-        return driver.page_source
+        return BeautifulSoup(driver.page_source)
 
 
 
