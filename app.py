@@ -74,6 +74,6 @@ if rad=="search":
         # df = pd.DataFrame(data=d)
         # df.replace("Na", "unknown", inplace=True)
         # df.replace("Na/NA", "unknown", inplace=True)
-        st.write(str(movie.get_actor2()))
+        st.write(str(movie.get_director2()))
 if rad=="database":
     st.write("upcoming feature")
