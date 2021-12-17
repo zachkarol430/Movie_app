@@ -107,13 +107,13 @@ class movie_get:
         except:
             return "NA"
     def get_actor2(self):
-            driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
+        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
             # element = driver.find_element(By.CLASS_NAME, "FLP8od")
             # element_text = element.text
+        return driver.page_source
 
 
-movie=movie_get("the prestige")
-print(movie.get_actor2())
+
 
 #
 #
