@@ -108,6 +108,7 @@ class movie_get:
             return "NA"
     def test(self):
         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
+        time.sleep(2)
         element = driver.find_elements(By.CLASS_NAME, "JjtOHd")
         element_text = element[0].text
         driver.quit()
