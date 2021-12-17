@@ -69,12 +69,10 @@ if rad=="search":
     else:
         movie = movie_get(str(text_input))
         ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
-        d = {"movie": [str(text_input)], "actor": [movie.get_actor()], "director": [movie.get_director()],
-                 "box office": ["box"]}
+        d = {"movie": [str(text_input)], "actor": [movie.test()], "director": [movie.get_director()]}
         df = pd.DataFrame(data=d)
         df.replace("Na", "unknown", inplace=True)
         df.replace("Na/NA", "unknown", inplace=True)
-        # st.table(d)
-        st.write(str(movie.test()))
+        st.table(d)
 if rad=="database":
     st.write("upcoming feature")
