@@ -52,13 +52,13 @@ class requester:
         return user_agent
     def add_options(self):
         user_agent = self.get_user_agent()
-        chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--incognito")
         # chrome_options.add_experimental_option("detach", True)
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("window-size=1400,900")
         chrome_options.add_argument(f"user-agent={user_agent}")
         chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--remote-debugging-port=9222")
         chrome_options.add_argument("--disable-setuid-sandbox")
     def get_url(self,url):
