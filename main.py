@@ -24,22 +24,22 @@ obj=requester()
 scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
 
-with open("movie.json") as source:
-    info = json.load(source)
-creds = service_account.Credentials.from_service_account_info(info)
+# with open("movie.json") as source:
+#     info = json.load(source)
+# creds = service_account.Credentials.from_service_account_info(info)
 
 # creds= ServiceAccountCredentials.from_json_keyfile_name("/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json", scope)
-client=pygsheets.authorize(service_account_file="movie.json")
+# client=pygsheets.authorize(service_account_file="movie.json")
+#
+#
+#
+# sheet=client.open("Movie_proj").sheet1
 
 
 
-sheet=client.open("Movie_proj").sheet1
-
-
-
-movies_list =list(sheet.get_col(1))[1:]
-while("" in movies_list):
-    movies_list.remove("")
+# movies_list =list(sheet.get_col(1))[1:]
+# while("" in movies_list):
+#     movies_list.remove("")
 
 #
 #
