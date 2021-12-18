@@ -7,13 +7,13 @@ from oauth2client.service_account import ServiceAccountCredentials
 from selenium.webdriver.common.by import By
 import pandas as pd
 import numpy as np
-scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
-with open("movie.json") as source:
-    info = json.load(source)
-creds = service_account.Credentials.from_service_account_info(info)
+# scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+# with open("movie.json") as source:
+#     info = json.load(source)
+# creds = service_account.Credentials.from_service_account_info(info)
 
 # creds= ServiceAccountCredentials.from_json_keyfile_name("/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json", scope)
-client=pygsheets.authorize(service_account_file="movie.json")
+# client=pygsheets.authorize(service_account_file="movie.json")
 
 
 import streamlit as st
