@@ -85,6 +85,8 @@ class movie_get:
                     return director
                 except:
                     return "Na"
+        driver.close()
+        driver.quit()
         return "Na"
     def get_genre(self):
         try:
