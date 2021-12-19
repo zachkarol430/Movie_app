@@ -13,7 +13,8 @@ import numpy as np
 # creds = service_account.Credentials.from_service_account_info(info)
 
 # creds= ServiceAccountCredentials.from_json_keyfile_name("/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json", scope)
-# client=pygsheets.authorize(service_account_file="movie.json")
+#
+
 
 
 import streamlit as st
