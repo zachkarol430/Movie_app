@@ -49,20 +49,6 @@ scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.
 class movie_get:
     def __init__(self, movie):
         self.movie= movie
-    def get_actor(self):
-        try:
-            try:
-                driver=obj.get_url("https://www.google.com/search?q=" + str(self.movie)+ " cast")
-                element = driver.find_elements(By.CLASS_NAME, "JjtOHd")
-                element_text = element[0].text
-                return element_text
-            except:
-                page = requests.get("https://www.google.com/search?q=" + str(self.movie)+" cast")
-                soup = BeautifulSoup(page.content, 'lxml')
-                actor=soup.find("div", class_="BNeawe s3v9rd AP7Wnd").text
-                return actor
-        except:
-            return "Na"
     def get_director(self):
         try:
             driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
@@ -108,15 +94,20 @@ class movie_get:
             return driver.find_elements(By.CLASS_NAME, "money")[2].text
         except:
             return "NA"
-    def test(self):
+    def get_actor(self):
         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
         page = BeautifulSoup(driver.page_source, "html.parser")
         try:
-            actor = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")
-            actor = actor[0].text
+            try:
+                actor = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")
+                actor = actor[0].text
+            except IndexError:
+                page = BeautifulSoup(driver.page_source, "html.parser")
+                actor = page.select('.JjtOHd')[0].text.strip()
         except:
-            page = BeautifulSoup(driver.page_source, "html.parser")
-            actor = page.select('.JjtOHd')[0].text.strip()
+            actor = "NA"
+        driver.close()
+        driver.quit()
         return actor
 
 
