@@ -75,5 +75,6 @@ if rad=="search":
         df.replace("Na", "unknown", inplace=True)
         df.replace("Na/NA", "unknown", inplace=True)
         st.table(d)
+        st.write(str(movie.get_box_office()))
 if rad=="database":
     st.write("upcoming feature")
