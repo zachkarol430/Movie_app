@@ -7,15 +7,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 from selenium.webdriver.common.by import By
 import pandas as pd
 import numpy as np
-# scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
-# with open("movie.json") as source:
-#     info = json.load(source)
-# creds = service_account.Credentials.from_service_account_info(info)
 
-# creds= ServiceAccountCredentials.from_json_keyfile_name("/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json", scope)
-#
-
-
+client=pygsheets.authorize(service_account_file="movie.json")
 
 import streamlit as st
 from main import movie_get
@@ -24,14 +17,16 @@ from main import movie_get
 
 
 
-# @st.cache
-# def movie_sheet():
-#     sheet = client.open("Movie_proj").sheet1
-#     df = pd.DataFrame(sheet.get_all_records())
-#     df = df.replace("", None)
-#     df = df.replace(" ", None)
-#     movie_data_frame = df.replace("NA", None)
-#     return movie_data_frame
+@st.cache
+def movie_sheet():
+    sheet = client.open("Movie_proj").sheet1
+    matrix = sheet.range("A:B", returnas="matrix")
+    df = pd.DataFrame(matrix)
+    nan_value = float("NaN")
+    df.replace("", nan_value, inplace=True)
+    df.dropna(how='all', axis=0, inplace=True)
+    movie_df= df
+    return movie_df
 
 
 
@@ -76,4 +71,4 @@ if rad=="search":
         df.replace("Na/NA", "unknown", inplace=True)
         st.table(d)
 if rad=="database":
-    st.write("upcoming feature")
+    st.dataframe(data=movie_sheet())

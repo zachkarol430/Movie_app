@@ -108,8 +108,6 @@ class movie_get:
                 actor = page.select('.JjtOHd')[0].text.strip()
         except:
             actor = "NA"
-        driver.close()
-        driver.quit()
         return actor
 
 
