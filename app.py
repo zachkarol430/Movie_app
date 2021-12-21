@@ -2,6 +2,7 @@ import os
 import time
 import json
 import pygsheets
+
 from google.oauth2 import service_account
 from oauth2client.service_account import ServiceAccountCredentials
 from selenium.webdriver.common.by import By
@@ -27,6 +28,7 @@ def movie_sheet():
     df.dropna(how='all', axis=0, inplace=True)
     df = df.rename(columns=df.iloc[0]).drop(df.index[0])
     return df
+
 
 
 
@@ -71,4 +73,4 @@ if rad=="search":
         df.replace("Na/NA", "unknown", inplace=True)
         st.table(d)
 if rad=="database":
-    st.dataframe(data=movie_sheet(),height=700)
+    st.write("lol")
