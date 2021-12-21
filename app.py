@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import numpy as np
 
-client=pygsheets.authorize(service_account_file="movie.json")
+
 
 import streamlit as st
 from main import movie_get
@@ -20,6 +20,7 @@ from main import movie_get
 #
 # @st.cache
 # def movie_sheet():
+#     client=pygsheets.authorize(service_account_file="movie.json")
 #     sheet = client.open("Movie_proj").sheet1
 #     matrix = sheet.range("A:B", returnas="matrix")
 #     df = pd.DataFrame(matrix)
