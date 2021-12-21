@@ -25,8 +25,8 @@ def movie_sheet():
     nan_value = float("NaN")
     df.replace("", nan_value, inplace=True)
     df.dropna(how='all', axis=0, inplace=True)
-    movie_df= df
-    return movie_df
+    df = df.rename(columns=df.iloc[0]).drop(df.index[0])
+    return df
 
 
 
@@ -71,4 +71,4 @@ if rad=="search":
         df.replace("Na/NA", "unknown", inplace=True)
         st.table(d)
 if rad=="database":
-    st.dataframe(data=movie_sheet())
+    st.dataframe(data=movie_sheet(),height=700)
