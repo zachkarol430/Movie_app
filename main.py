@@ -64,15 +64,13 @@ class movie_get:
                 if director != "Images":
                     return director
                 else:
-                    lol
+                    lol  #probs should fix loop
             except:
                 try:
                     director = soup.find("div", class_="BNeawe iBp4i AP7Wnd").text
                     return director
                 except:
                     return "Na"
-        driver.close()
-        driver.quit()
         return "Na"
     def get_genre(self):
         try:
@@ -85,14 +83,19 @@ class movie_get:
         except:
             return "Na","Na"
     def get_box_office(self):
-        movie = ("+".join(self.movie.split(" ")))
-        driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
-        page = BeautifulSoup(driver.page_source, "html.parser")
-        canonical = page.find("a", class_="a-size-medium a-link-normal a-text-bold")
-        link = canonical['href']
-        driver = obj.get_url(f"https://www.boxofficemojo.com{link}")
-        money = driver.find_elements(By.CLASS_NAME, "money")[2].text
-        return money
+        try:
+            movie = ("+".join(self.movie.split(" ")))
+            driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
+            page = BeautifulSoup(driver.page_source, "html.parser")
+            canonical = page.find("a", class_="a-size-medium a-link-normal a-text-bold")
+            link = canonical['href']
+            driver = obj.get_url(f"https://www.boxofficemojo.com{link}")
+            money = driver.find_elements(By.CLASS_NAME, "money")[2].text
+            return money
+        except:
+            return "NA"
+        driver.close()
+        driver.quit()
     def get_actor(self):
         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
         page = BeautifulSoup(driver.page_source, "html.parser")
