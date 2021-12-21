@@ -17,17 +17,17 @@ from main import movie_get
 
 
 
-
-@st.cache
-def movie_sheet():
-    sheet = client.open("Movie_proj").sheet1
-    matrix = sheet.range("A:B", returnas="matrix")
-    df = pd.DataFrame(matrix)
-    nan_value = float("NaN")
-    df.replace("", nan_value, inplace=True)
-    df.dropna(how='all', axis=0, inplace=True)
-    df = df.rename(columns=df.iloc[0]).drop(df.index[0])
-    return df
+#
+# @st.cache
+# def movie_sheet():
+#     sheet = client.open("Movie_proj").sheet1
+#     matrix = sheet.range("A:B", returnas="matrix")
+#     df = pd.DataFrame(matrix)
+#     nan_value = float("NaN")
+#     df.replace("", nan_value, inplace=True)
+#     df.dropna(how='all', axis=0, inplace=True)
+#     df = df.rename(columns=df.iloc[0]).drop(df.index[0])
+#     return df
 
 
 
