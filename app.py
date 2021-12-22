@@ -69,5 +69,5 @@ if rad=="search":
         df.replace("Na/NA", "unknown", inplace=True)
         st.table(d)
 if rad=="database":
-    st.dataframe(df,height=700)
+    st.dataframe(data=movie_sheet(),height=700)
 
