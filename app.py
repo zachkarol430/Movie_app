@@ -57,9 +57,9 @@ table th:nth-child(1) {
 
 
 if rad=="search":
-    text_input = st.text_input("enter movie get director")
+    text_input = st.text_input("enter movie")
     if(text_input==""):
-        st.write("enter movie")
+        st.write("enter movie above")
     else:
         movie = movie_get(str(text_input))
         ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
