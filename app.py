@@ -29,11 +29,7 @@ rad=st.sidebar.radio("Navigation",["search","database"])
 
 
 
-#this removes index colums
 
-# df = pd.DataFrame(movie_sheet())
-# df.fillna(0)
-# df = df.iloc[:,[0, 1,5,6]]
 
 
 st.markdown("""

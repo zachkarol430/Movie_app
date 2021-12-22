@@ -38,8 +38,7 @@ obj=requester()
 
 
 # movies_list =list(sheet.get_col(1))[1:]
-# while("" in movies_list):
-#     movies_list.remove("")
+
 
 #
 #
@@ -108,6 +107,8 @@ class movie_get:
                 actor = page.select('.JjtOHd')[0].text.strip()
         except:
             actor = "NA"
+        driver.close()
+        driver.quit()
         return actor
 
 
