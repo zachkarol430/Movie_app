@@ -7,7 +7,9 @@ from google.oauth2 import service_account
 from oauth2client.service_account import ServiceAccountCredentials
 from selenium.webdriver.common.by import By
 import pandas as pd
+import gc
 import numpy as np
+
 
 
 
@@ -15,11 +17,20 @@ import streamlit as st
 from main import movie_get
 
 
+@st.cache
+def movie_sheet():
+    client = pygsheets.authorize(service_account_file="movie.json")
+    sheet = client.open("Movie_proj").sheet1
+    matrix = sheet.range("A:B", returnas="matrix")
+    df = pd.DataFrame(matrix)
+    nan_value = float("NaN")
+    df.replace("", nan_value, inplace=True)
+    df.dropna(how='all', axis=0, inplace=True)
+    df = df.rename(columns=df.iloc[0]).drop(df.index[0])
+    return df
 
 
-
-
-
+gc.collect()
 
 st.title('Zach Karol Movie Site')
 
