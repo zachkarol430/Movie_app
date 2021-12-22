@@ -69,4 +69,5 @@ if rad=="search":
         df.replace("Na/NA", "unknown", inplace=True)
         st.table(d)
 if rad=="database":
-    st.write("lol")
+    st.dataframe(d,height=700)
+
