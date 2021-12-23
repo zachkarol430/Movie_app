@@ -94,9 +94,9 @@ class movie_get:
         except:
             return "NA"
     def get_actor(self):
-        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
-        page = BeautifulSoup(driver.page_source, "html.parser")
         try:
+            driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
+            page = BeautifulSoup(driver.page_source, "html.parser")
             try:
                 actor = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")
                 actor = actor[0].text
@@ -108,8 +108,6 @@ class movie_get:
         driver.close()
         driver.quit()
         return actor
-
-
 
 
 #
