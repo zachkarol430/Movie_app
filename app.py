@@ -63,10 +63,9 @@ try:
         else:
             movie = movie_get(str(text_input))
             actor= movie.get_actor()
-            count=0
-            while actor=="NA" and count<4:
-                actor=movie.get_actor()
-                count +=1
+            #no commment lol while loop memory leak
+            if actor=="NA": actor=movie.get_actor()
+            if actor == "NA": actor = movie.get_actor()
             ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
             d = {"movie": [str(text_input)], "actor": [actor], "director": [movie.get_director()], "box office": [str(movie.get_box_office())]}
             st.table(d)
