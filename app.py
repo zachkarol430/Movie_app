@@ -66,9 +66,6 @@ try:
             if actor=="NA": actor=movie.get_actor()
             ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
             d = {"movie": [str(text_input)], "actor": [actor], "director": [movie.get_director()], "box office": [str(movie.get_box_office())]}
-            df = pd.DataFrame(data=d)
-            df.replace("Na", "unknown", inplace=True)
-            df.replace("Na/NA", "unknown", inplace=True)
             st.table(d)
     if rad=="database":
         st.dataframe(data=movie_sheet(),height=700)

@@ -93,8 +93,6 @@ class movie_get:
             return money
         except:
             return "NA"
-        driver.close()
-        driver.quit()
     def get_actor(self):
         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
         page = BeautifulSoup(driver.page_source, "html.parser")
