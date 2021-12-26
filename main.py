@@ -12,7 +12,7 @@ from Selenium_functions import requester
 import concurrent.futures
 
 
-obj=requester()
+
 
 
 
@@ -53,6 +53,7 @@ class movie_get:
         self.actor= None
         self.box_office= None
     def get_director(self):
+        obj = requester()
         try:
             driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
             element = driver.find_element(By.CLASS_NAME, "FLP8od")
@@ -88,6 +89,7 @@ class movie_get:
         except:
             return "Na","Na"
     def get_box_office(self):
+        obj = requester()
         try:
             movie = ("+".join(self.movie.split(" ")))
             driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
@@ -102,6 +104,7 @@ class movie_get:
         driver.close()
         driver.quit()
     def get_actor(self):
+        obj = requester()
         try:
             driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
             page = BeautifulSoup(driver.page_source, "html.parser")
