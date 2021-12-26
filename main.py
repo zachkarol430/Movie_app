@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Selenium_functions import requester
+import concurrent.futures
 
 
 obj=requester()
@@ -48,6 +49,9 @@ obj=requester()
 class movie_get:
     def __init__(self, movie):
         self.movie= movie
+        self.director= None
+        self.actor= None
+        self.box_office= None
     def get_director(self):
         try:
             driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
@@ -108,6 +112,16 @@ class movie_get:
         driver.close()
         driver.quit()
         return actor
+    def get_info(self):
+        result = []
+        list_foo = [self.get_director, self.get_actor, self.get_box_office]
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            thread = [executor.submit(foo) for foo in list_foo]
+            for f in concurrent.futures.as_completed(thread):
+                result.append(f.result())
+        self.director = result[0]
+        self.actor = result[1]
+        self.box_office = result[2]
 
 
 #
