@@ -55,22 +55,17 @@ if __name__ == "__main__":
     """, unsafe_allow_html=True)
 
 
-    try:
-        if rad=="search":
-            text_input = st.text_input("enter movie")
-            if(text_input==""):
-                st.write("enter movie above")
-            else:
-                movie = movie_get(str(text_input))
-                movie.get_info()
-                #no commment lol while loop memory leak
-                if movie.actor =="NA": actor=movie.get_actor()
-                if movie.actor == "NA": actor = movie.get_actor()
-                ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
-                d = {"movie": [str(text_input)], "actor": [movie.actor], "director": [movie.director], "box office": [str(movie.box_office)]}
-                st.table(d)
-        if rad=="database":
-            st.dataframe(data=movie_sheet(),height=700)
-    except:
-        st.write("reload page :)")
 
+    if rad=="search":
+        text_input = st.text_input("enter movie")
+        if(text_input==""):
+            st.write("enter movie above")
+        else:
+            movie = movie_get(str(text_input))
+            movie.get_info()
+            #no commment lol while loop memory leak
+            ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
+            d = {"movie": [str(text_input)], "actor": [movie.actor], "director": [movie.director], "box office": [str(movie.box_office)]}
+            st.table(d)
+    if rad=="database":
+        st.dataframe(data=movie_sheet(),height=700)
