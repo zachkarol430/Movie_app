@@ -75,8 +75,6 @@ class movie_get:
                     return director
                 except:
                     return "Na"
-        driver.close()
-        driver.quit()
         return "Na"
     def get_genre(self):
         try:
@@ -101,8 +99,6 @@ class movie_get:
             return money
         except:
             return "NA"
-        driver.close()
-        driver.quit()
     def get_actor(self):
         obj = requester()
         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
@@ -116,8 +112,6 @@ class movie_get:
                 actor = page.select('.JjtOHd')[0].text.strip()
         except:
             actor = "NA"
-        driver.close()
-        driver.quit()
         return actor
     def get_info(self):
         result = []
