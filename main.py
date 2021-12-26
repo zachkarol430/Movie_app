@@ -54,8 +54,8 @@ class movie_get:
         self.box_office= None
     def get_director(self):
         obj = requester()
+        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
         try:
-            driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
             element = driver.find_element(By.CLASS_NAME, "FLP8od")
             element_text = element.text
             return element_text
@@ -90,9 +90,9 @@ class movie_get:
             return "Na","Na"
     def get_box_office(self):
         obj = requester()
+        movie = ("+".join(self.movie.split(" ")))
+        driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
         try:
-            movie = ("+".join(self.movie.split(" ")))
-            driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
             page = BeautifulSoup(driver.page_source, "html.parser")
             canonical = page.find("a", class_="a-size-medium a-link-normal a-text-bold")
             link = canonical['href']
@@ -105,8 +105,8 @@ class movie_get:
         driver.quit()
     def get_actor(self):
         obj = requester()
+        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
         try:
-            driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
             page = BeautifulSoup(driver.page_source, "html.parser")
             try:
                 actor = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")
