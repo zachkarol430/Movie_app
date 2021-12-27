@@ -63,7 +63,6 @@ if __name__ == "__main__":
         else:
             movie = movie_get(str(text_input))
             movie.get_info()
-            if movie.actor=="NA": movie.get_actor()
             #no commment lol while loop memory leak
             ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
             d = {"movie": [str(text_input)], "actor": [movie.actor], "director": [movie.director], "box office": [str(movie.box_office)]}
