@@ -43,6 +43,8 @@ chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 
 
 class requester:
+    def __init__(self):
+        pass
     def get_user_agent(self):
         software_names = [SoftwareName.CHROME.value]
         operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value,OperatingSystem.MACOS.value]
