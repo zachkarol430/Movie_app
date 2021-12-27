@@ -120,12 +120,10 @@ class movie_get:
             return actor
             driver.quit()
     def get_info(self):
-        result = []
         list_foo = [self.get_director, self.get_actor, self.get_box_office]
         with concurrent.futures.ProcessPoolExecutor() as executor:
             thread = [executor.submit(foo) for foo in list_foo]
-            for f in concurrent.futures.as_completed(thread):
-                result.append(f.result())
+        result = [x.result() for x in thread]
         self.director = result[0]
         self.actor = result[1]
         self.box_office = result[2]
