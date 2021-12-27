@@ -27,12 +27,10 @@ from random_user_agent.params import SoftwareName, OperatingSystem
 
 #ADD DESIRED CAPBILITY IF WANT TO USE PROXY AGAIN> ADD TO DRIBER IN GET URL
 
-path= "/Users/zachkarol/Downloads/chromedriver 2"
-s=Service(os.environ.get('CHROMEDRIVER_PATH'))
 
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+
+
 
 
 # you can also import SoftwareEngine, HardwareType, SoftwareType, Popularity from random_user_agent.params
@@ -40,11 +38,12 @@ chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 
 
 
-
+chrome_options = webdriver.ChromeOptions()
 
 class requester:
     def __init__(self):
-        pass
+        self.s = Service(os.environ.get('CHROMEDRIVER_PATH'))
+        chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
     def get_user_agent(self):
         software_names = [SoftwareName.CHROME.value]
         operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value,OperatingSystem.MACOS.value]
@@ -61,11 +60,11 @@ class requester:
         # chrome_options.add_argument(f"user-agent={user_agent}")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--remote-debugging-port=9222")
+        # chrome_options.add_argument("--remote-debugging-port=9222")
         chrome_options.add_argument("--disable-setuid-sandbox")
     def get_url(self,url):
         self.add_options()
-        driver = webdriver.Chrome(service=s, options=chrome_options)##add desired capbilites for proxt
+        driver = webdriver.Chrome(service=self.s, options=chrome_options)##add desired capbilites for proxt
         driver.get(url)
         return driver
 
