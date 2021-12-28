@@ -125,7 +125,7 @@ class movie_get:
             thread = [executor.submit(foo) for foo in list_foo]
             for f in concurrent.futures.as_completed(thread):
                 result.append(f)
-        results= map(str, result)
+        results= [str(x) for x in result]
         self.director = results[0]
         self.actor = results[1]
         self.box_office = results[2]
