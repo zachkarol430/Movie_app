@@ -122,10 +122,9 @@ class movie_get:
         list_foo = [self.get_director, self.get_actor, self.get_box_office]
         with concurrent.futures.ProcessPoolExecutor() as executor:
             thread = [executor.submit(foo) for foo in list_foo]
-        result = [x.result(timeout=3) for x in thread]
-        self.director = result[0]
-        self.actor = result[1]
-        self.box_office = result[2]
+        self.director = thread[0]
+        self.actor = thread[1]
+        self.box_office = thread[2]
 
 
 #
