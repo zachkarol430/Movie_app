@@ -104,8 +104,8 @@ class movie_get:
             driver.quit()
     def get_actor(self):
         obj = requester()
-        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
         try:
+            driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
             page = BeautifulSoup(driver.page_source, "html.parser")
             try:
                 actor = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")
@@ -120,12 +120,10 @@ class movie_get:
             driver.quit()
     def get_info(self):
         list_foo = [self.get_director, self.get_actor, self.get_box_office]
-        result = []
         with concurrent.futures.ProcessPoolExecutor() as executor:
             thread = [executor.submit(foo) for foo in list_foo]
-            for f in concurrent.futures.as_completed(thread):
-                result.append(f)
-        results= [str(x) for x in result]
+        concurrent.futures.wait(thread)
+        results= [x.result() for x in thread]
         self.director = results[0]
         self.actor = results[1]
         self.box_office = results[2]
