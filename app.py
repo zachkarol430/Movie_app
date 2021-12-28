@@ -66,8 +66,8 @@ if __name__ == "__main__":
             movie.get_info()
             #no commment lol while loop memory leak
             ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
-            d = {"movie": [str(text_input)], "actor": [str(movie.actor.result())],
-                 "director": [movie.director.restult()], "box office": [str(movie.box_office.result())]}
+            d = {"movie": [str(text_input)], "actor": [movie.actor],
+                 "director": [movie.director], "box office": [movie.box_office]}
             st.table(d)
     if rad=="database":
         st.dataframe(data=movie_sheet(),height=700)
