@@ -53,10 +53,10 @@ class movie_get:
         self.actor= None
         self.box_office= None
     def get_director(self):
-        obj = requester()
-        driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " director")
+        driver = requests.get("https://www.google.com/search?q=" + str(self.movie) + " director")
         try:
-            element = driver.find_element(By.CLASS_NAME, "FLP8od")
+            soup = BeautifulSoup(driver.content, 'html.parser')
+            element = soup.find(class_= "FLP8od")
             element_text = element.text
             return element_text
         except:
@@ -75,8 +75,6 @@ class movie_get:
                     return director
                 except:
                     return "Na"
-        finally:
-            driver.quit()
     def get_genre(self):
         try:
             driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " genre")
