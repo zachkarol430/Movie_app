@@ -88,45 +88,44 @@ class movie_get:
         except:
             return "Na","Na"
     def get_box_office(self):
-        obj = requester()
-        movie = ("+".join(self.movie.split(" ")))
-        driver = obj.get_url(f"https://www.boxofficemojo.com/search/?q={movie}")
         try:
-            page = BeautifulSoup(driver.page_source, "html.parser")
+            movie = ("+".join(self.movie.split(" ")))
+            driver = requests.get(f"https://www.boxofficemojo.com/search/?q={movie}")
+            page = BeautifulSoup(driver.content, "html.parser")
             canonical = page.find("a", class_="a-size-medium a-link-normal a-text-bold")
             link = canonical['href']
-            driver = obj.get_url(f"https://www.boxofficemojo.com{link}")
-            money = driver.find_elements(By.CLASS_NAME, "money")[2].text
-            return money
+            driver = requests.get(f"https://www.boxofficemojo.com{link}")
+            page = BeautifulSoup(driver.content, "html.parser")
+            money = page.find_all(class_= "money")[2].get_text()
         except:
-            return "NA"
+            money= "NA"
         finally:
-            driver.quit()
+            return money
     def get_actor(self):
-        obj = requester()
         try:
-            driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " cast")
-            page = BeautifulSoup(driver.page_source, "html.parser")
+            driver = requests.get("https://www.google.com/search?q=" + str(self.movie) + " cast")
+            page = BeautifulSoup(driver.content, "html.parser")
             try:
                 actor = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")
                 actor = actor[0].text
             except IndexError:
-                page = BeautifulSoup(driver.page_source, "html.parser")
+                page = BeautifulSoup(driver.content, "html.parser")
                 actor = page.select('.JjtOHd')[0].text.strip()
         except:
             actor = "NA"
         finally:
             return actor
-            driver.quit()
     def get_info(self):
         list_foo = [self.get_director, self.get_actor, self.get_box_office]
         with concurrent.futures.ProcessPoolExecutor() as executor:
             thread = [executor.submit(foo) for foo in list_foo]
-        concurrent.futures.wait(thread)
         results= [x.result() for x in thread]
         self.director = results[0]
         self.actor = results[1]
         self.box_office = results[2]
+
+
+
 
 
 #
