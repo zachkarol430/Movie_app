@@ -20,26 +20,26 @@ import concurrent.futures
 
 
 
-
-
+#
+#
 # scope = ["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
-
-
+#
+#
 # with open("movie.json") as source:
 #     info = json.load(source)
 # creds = service_account.Credentials.from_service_account_info(info)
-
+#
 # creds= ServiceAccountCredentials.from_json_keyfile_name("/Users/zachkarol/Movie_project/movie-project-330118-9bf05ce7085e.json", scope)
 # client=pygsheets.authorize(service_account_file="movie.json")
 #
 #
 #
 # sheet=client.open("Movie_proj").sheet1
-
-
-
+#
+#
+#
 # movies_list =list(sheet.get_col(1))[1:]
-
+#
 
 #
 #
@@ -53,28 +53,23 @@ class movie_get:
         self.actor= None
         self.box_office= None
     def get_director(self):
-        driver = requests.get("https://www.google.com/search?q=" + str(self.movie) + " director")
+        page = requests.get("https://www.google.com/search?q=" + str(self.movie) + "director")
+        soup= BeautifulSoup(page.content, 'html.parser')
         try:
-            soup = BeautifulSoup(driver.content, 'html.parser')
-            element = soup.find(class_= "FLP8od")
-            element_text = element.text
-            return soup
+            director= soup.find(class_= "BNeawe iBp4i AP7Wnd").text
         except:
             try:
-                page = requests.get("https://www.google.com/search?q=" + str(self.movie) + "director")
-                soup = BeautifulSoup(page.content, 'html.parser')
-                directors = soup.find_all("div", class_="BNeawe deIvCb AP7Wnd")
-                director = directors[1].text
-                if director != "Images":
-                    return soup
-                else:
-                    lol  #probs should fix loop
+                director= soup.find_all(class_="BNeawe deIvCb AP7Wnd")[1].text
             except:
-                try:
-                    director = soup.find("div", class_="BNeawe iBp4i AP7Wnd").text
-                    return soup
-                except:
-                    return "Na"
+                director= "NA"
+        if director=="Images":
+            try:
+                director =soup.find(class_="BNeawe s3v9rd AP7Wnd").text
+            except:
+                 director="NA"
+        if director=="Top stories":
+            director="NA"
+        return director
     def get_genre(self):
         try:
             driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " genre")
@@ -123,73 +118,3 @@ class movie_get:
         self.box_office = results[2]
 
 
-
-
-
-#
-#
-# director_list=[]
-# actor_list=[]
-# primary_genre_list=[]
-# secondary_genre_list=[]
-#
-#
-# #just add things you want to pretty simple. I think this sucks but small issue to add data at end.
-#
-# #maybe try parrell requests
-#
-# #maybe add row by time
-# # movie=movie_get(movies_list[-1])
-# #
-# # primary,secondary=movie.get_genre()
-# # sheet.update_row(len(movies_list)+1,[movie.get_actor(),movie.get_director(),primary,secondary,movie.get_box_office()], col_offset=5)
-# box_office_list=[]
-# for i in movies_list:
-#     movie=movie_get(i)
-#     box_office_list.append(movie.get_box_office())
-#
-# sheet.update_col(10,box_office_list, row_offset=1)
-#
-#
-#
-#
-#     # genre=movie.get_genre()
-#     # primary_genre_list.append(genre[0])
-#     # secondary_genre_list.append(genre[1])
-#
-#
-#
-# for i in range(len(director_list)):
-#     if director_list[i]== "":
-#         director_list[i]= "NA"
-#     else:
-#         pass
-#
-#
-# index_na=[i for i, e in enumerate(director_list) if e =="NA"]
-# c = [ movies_list[i] for i in index_na]
-#
-# new_na_list=[]
-# #
-# for i in range(len(c)):
-#     movie=movie_get(c[i])
-#     director=movie.get_director()
-#     new_na_list.append(director)
-#
-# index=0
-# for i in index_na:
-#     director_list[i]=new_na_list[index]
-#     index=index+1
-#
-# list_of_attrib=director_list,actor_list,primary_genre_list, secondary_genre_list
-#
-#
-# #LOOOKO segfs
-# for i in list_of_attrib:
-#     print(i)
-#     #conditional format
-#     # https: // pygsheets.readthedocs.io / en / stable / chart.html
-#     # wks.add_conditional_formatting('A1', 'A4', 'NUMBER_BETWEEN', {'backgroundColor': {'red': 1}}, ['1', '5'])
-#     # sheet.update_col(index,i)
-#     index=index+1
-#
