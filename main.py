@@ -10,6 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Selenium_functions import requester
 import concurrent.futures
+import pandas as pd
 
 
 
@@ -116,5 +117,4 @@ class movie_get:
         self.director = results[0]
         self.actor = results[1]
         self.box_office = results[2]
-
 
