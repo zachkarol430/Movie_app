@@ -63,11 +63,11 @@ if __name__ == "__main__":
             st.write("enter movie above")
         else:
             movie = movie_get(str(text_input))
-            movie.get_info()
+            # movie.get_info()
             #no commment lol while loop memory leak
             ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
-            d = {"movie": [str(text_input)], "actor": [movie.actor],
-                 "director": [movie.director], "box office": [movie.box_office]}
-            st.write(movie.director)
+            # d = {"movie": [str(text_input)], "actor": [movie.actor],
+            #      "director": [movie.director], "box office": [movie.box_office]}
+            st.write(movie.get_director())
     if rad=="database":
         st.dataframe(data=movie_sheet(),height=700)
