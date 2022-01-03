@@ -68,6 +68,6 @@ if __name__ == "__main__":
             ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
             d = {"movie": [str(text_input)], "actor": [movie.actor],
                  "director": [movie.director], "box office": [movie.box_office]}
-            st.table(d)
+            st.write(movie.director)
     if rad=="database":
         st.dataframe(data=movie_sheet(),height=700)

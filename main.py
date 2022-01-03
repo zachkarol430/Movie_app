@@ -58,7 +58,7 @@ class movie_get:
             soup = BeautifulSoup(driver.content, 'html.parser')
             element = soup.find(class_= "FLP8od")
             element_text = element.text
-            return element_text
+            return soup
         except:
             try:
                 page = requests.get("https://www.google.com/search?q=" + str(self.movie) + "director")
@@ -66,13 +66,13 @@ class movie_get:
                 directors = soup.find_all("div", class_="BNeawe deIvCb AP7Wnd")
                 director = directors[1].text
                 if director != "Images":
-                    return director
+                    return soup
                 else:
                     lol  #probs should fix loop
             except:
                 try:
                     director = soup.find("div", class_="BNeawe iBp4i AP7Wnd").text
-                    return director
+                    return soup
                 except:
                     return "Na"
     def get_genre(self):
