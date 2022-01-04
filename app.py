@@ -65,13 +65,13 @@ if __name__ == "__main__":
         else:
             movie = movie_get(str(text_input))
             movie.get_info()
-            # #no commment lol while loop memory leak
-            # ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
+            # # #no commment lol while loop memory leak
+            # # ##add more stuff and fix dataframe issue. Each colums needs to be same type. Also weird issue with spaces
             d = {"movie": [str(text_input)], "actor": [movie.actor],
                  "director": [movie.director], "box office": [movie.box_office]}
             st.table(d)
-            if str(text_input).lower() in (i.lower() for i in movie_list):
-                index=df[df['Movie'].str.lower() == str(text_input).lower()].index[0]
+            if text_input.lower() in (i.lower().strip() for i in movie_list):
+                index=df[df['Movie'].str.lower().str.strip() == str(text_input).lower()].index[0]
                 rating=df.iloc[:,1].iloc[index-1]
                 st.write(f"Zach Karol gave this movie a {rating}")
     if rad=="database":
