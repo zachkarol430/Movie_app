@@ -71,7 +71,7 @@ if __name__ == "__main__":
                  "director": [movie.director], "box office": [movie.box_office]}
             st.table(d)
             if str(text_input).lower() in (i.lower() for i in movie_list):
-                index=df[df['Movie'].str.lower() == text_input].index[0]
+                index=df[df['Movie'].str.lower() == str(text_input).lower()].index[0]
                 rating=df.iloc[:,1].iloc[index-1]
                 st.write(f"Zach Karol gave this movie a {rating}")
     if rad=="database":
