@@ -62,12 +62,12 @@ class movie_get:
             try:
                 director= soup.find_all(class_="BNeawe deIvCb AP7Wnd")[1].text
             except:
-                director= "NA"
+                director= "Na"
         if director=="Images":
             try:
                 director =soup.find(class_="BNeawe s3v9rd AP7Wnd").text
             except:
-                 director="NA"
+                 director= "Na"
         if director=="Top stories":
             director="NA"
         return director

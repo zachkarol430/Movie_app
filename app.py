@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
 
     if rad=="search":
-        text_input = st.text_input("enter movie")
+        text_input = st.text_input("enter movie, enter exact movie, don't enter star wars for example")
         if(text_input==""):
             st.write("enter movie above")
         else:
