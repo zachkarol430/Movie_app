@@ -36,6 +36,9 @@ class video_game_get:
         except:
             publisher = "NA"
         finally:
+            if publisher== "Publisher(s)":
+                try: publisher = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")[1].text
+                except: publisher= "NA"
             return publisher
     def get_reviews(self):
         try:
@@ -68,7 +71,7 @@ class video_game_get:
         genre=self.get_genre()
         for i in range(len(genre)-1):
             if genre[i].islower() and genre[i+1].isupper():
-                genre= genre[0:i]
+                genre= genre[0:i+1]
                 break
         return genre
     def get_info(self):
