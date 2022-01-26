@@ -8,7 +8,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from Selenium_functions import requester
 import concurrent.futures
 import pandas as pd
 
@@ -71,16 +70,16 @@ class movie_get:
         if director=="Top stories":
             director="NA"
         return director
-    def get_genre(self):
-        try:
-            driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " genre")
-            driver.implicitly_wait(10)
-            element = driver.find_elements(By.CLASS_NAME, "bVj5Zb.FozYP")
-            primary_genre = element[0].text
-            secondary_genre= element[1].text
-            return primary_genre,secondary_genre
-        except:
-            return "Na","Na"
+    # def get_genre(self):
+    #     try:
+    #         driver = obj.get_url("https://www.google.com/search?q=" + str(self.movie) + " genre")
+    #         driver.implicitly_wait(10)
+    #         element = driver.find_elements(By.CLASS_NAME, "bVj5Zb.FozYP")
+    #         primary_genre = element[0].text
+    #         secondary_genre= element[1].text
+    #         return primary_genre,secondary_genre
+    #     except:
+    #         return "Na","Na"
     def get_box_office(self):
         try:
             movie = ("+".join(self.movie.split(" ")))
