@@ -7,10 +7,12 @@ from selenium.webdriver.common.by import By
 
 from bs4 import BeautifulSoup
 import requests
-import concurrent.futures
 from selenium.webdriver.common.keys import Keys
 from urllib.parse import urlunsplit, urlencode
-obj = requester()
+from selenium.webdriver.common.by import By
+
+
+obj=requester()
 
 class videogame_getter:
     def __init__(self, game):
@@ -32,10 +34,8 @@ class videogame_getter:
         platforms = [x["value"] for x in page.find_all(type="videogameplatform")]
         genre = page.find(type="videogamegenre")["value"]
         release_date = page.find("releasedate")["value"]
-        publisher = page.find(type="videogamepublisher")["value"]
-        return platforms, genre, release_date, publisher
-
-
+        developer = page.find(type="videogamedeveloper")["value"]
+        return platforms, genre, release_date, developer
 
 
 
