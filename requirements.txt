@@ -8,3 +8,4 @@ random_user_agent==1.0.1
 requests
 selenium==4.1
 streamlit==1.2.0
+lxml
