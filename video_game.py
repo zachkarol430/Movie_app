@@ -1,87 +1,56 @@
+from Selenium_functions import requester
+from selenium.webdriver.common.by import By
+
+
+
+
+
 from bs4 import BeautifulSoup
 import requests
 import concurrent.futures
+from selenium.webdriver.common.keys import Keys
+from urllib.parse import urlunsplit, urlencode
+obj = requester()
 
-
-class video_game_get:
-    def __init__(self, video_game):
-        self.video_game= video_game
-        self.release_date= None
-        self.genre= None
-        self.publisher= None
-    def get_release_date(self):
-        try:
-            driver = requests.get("https://www.google.com/search?q=" + str(self.video_game) + " relase date")
-            page = BeautifulSoup(driver.content, "html.parser")
-            try:
-                release_date = page.find("div", class_="BNeawe iBp4i AP7Wnd").text
-            except:
-                release_date = "NA"
-        except:
-            release_date = "Chrome crashed"
-        finally:
-            return release_date
-    def get_publisher(self):
-        try:
-            driver = requests.get("https://www.google.com/search?q=" + str(self.video_game) + "  publishers")
-            page = BeautifulSoup(driver.content, "html.parser")
-            try: publisher = page.find("div", class_="kvKEAb").text
-            except AttributeError:
-                try:  publisher = page.find("div", class_="am3QBf").text
-                except:
-                    try: publisher = page.find("div", class_="BNeawe s3v9rd AP7Wnd").text
-                    except: publisher = "NA"
-            except:
-                publisher = "NA"
-        except:
-            publisher = "NA"
-        finally:
-            if publisher== "Publisher(s)":
-                try: publisher = page.find_all("div", class_="BNeawe s3v9rd AP7Wnd")[1].text
-                except: publisher= "NA"
-            return publisher
-    def get_reviews(self):
-        try:
-            driver = requests.get("https://www.google.com/search?q=" + str(self.video_game) + " video game reviews")
-            page = BeautifulSoup(driver.content, "html.parser")
-            try:
-                review = page.find("span", class_="oqSTJd").text ##this just grabs first revierw, but diff company have reviews. ill solve later
-            except:
-                review = "NA"
-        except:
-            review = "Chrome crashed"
-        finally:
-            return review
-    def get_genre(self):
-        try:
-            driver = requests.get("https://www.google.com/search?q=" + str(self.video_game) + " video game genres")
-            page = BeautifulSoup(driver.content, "html.parser")
-            try: genre = page.find("div", class_="am3QBf").text
-            except:
-                try: genre = page.find("div", class_="BNeawe iBp4i AP7Wnd").text
-                except:
-                    try: genre= page.find("div", class_="BNeawe s3v9rd AP7Wnd").text
-                    except: genre = "NA"
-        except:
-            genre = "Chrome crashed"
-        finally:
-            return genre
-    def fix_genre(self):
-        #this may be removed or fixed. Really niche
-        genre=self.get_genre()
-        for i in range(len(genre)-1):
-            if genre[i].islower() and genre[i+1].isupper():
-                genre= genre[0:i+1]
-                break
-        return genre
+class videogame_getter:
+    def __init__(self, game):
+        self.game = str(game)
     def get_info(self):
-        list_foo = [self.get_release_date, self.fix_genre, self.get_publisher]
-        with concurrent.futures.ProcessPoolExecutor() as executor:
-            thread = [executor.submit(foo) for foo in list_foo]
-        results = [x.result() for x in thread]
-        self.release_date = results[0]
-        self.genre = results[1]
-        self.publisher = results[2]
+        driver = obj.get_url("https://videogamegeek.com/")
+        search = driver.find_element(By.XPATH, "(//input[@id='site-search'])")
+        search.send_keys(self.game)
+        search.send_keys(Keys.RETURN)
+        page = BeautifulSoup(driver.page_source, "html.parser")
+        div = page.find("div", class_="geekitem_linkeditems_title")
+        end_of_url = str(div.find("a")['href'])
+        end_of_url.split('/')[2]
+        scheme = "https"
+        netloc = "videogamegeek.com"
+        path = "xmlapi2/thing"
+        query_string = urlencode(dict(id=end_of_url.split('/')[2]))
+        page = BeautifulSoup(requests.get(urlunsplit((scheme, netloc, path, query_string, ""))).content, "lxml")
+        platforms = [x["value"] for x in page.find_all(type="videogameplatform")]
+        genre = page.find(type="videogamegenre")["value"]
+        release_date = page.find("releasedate")["value"]
+        publisher = page.find(type="videogamepublisher")["value"]
+        return platforms, genre, release_date, publisher
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

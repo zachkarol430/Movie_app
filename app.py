@@ -16,7 +16,7 @@ import concurrent.futures
 
 import streamlit as st
 from movie import movie_get
-from video_game import video_game_get
+from video_game import videogame_getter
 
 def main():
     @st.cache
@@ -64,11 +64,11 @@ def main():
         search_for = st.radio("Search for", ["Movie", "Videogame"])
         if search_for == "Videogame":
             text_input= st.text_input("enter video game")
-            video_game = video_game_get(str(text_input))
+            video_game = videogame_getter(str(text_input))
             if text_input != '':
-                video_game.get_info()
-                d = {"videogame": [str(text_input)], "release date": [video_game.release_date],
-                    "publisher": [video_game.publisher], "genre": [video_game.genre]}
+                info = video_game.get_info()
+                d = {"videogame": [str(text_input)], "release date": [info[2]],
+                    "publisher": [info[3]], "genre": [info[1]], "platform": [info[0]]}
                 st.table(d)
         if search_for=="Movie":
             text_input = st.text_input("enter movie, enter exact movie, don't enter star wars for example")
