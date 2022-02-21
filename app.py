@@ -66,10 +66,13 @@ def main():
             text_input= st.text_input("enter video game")
             video_game = videogame_getter(str(text_input))
             if text_input != '':
-                info = video_game.get_info()
-                d = {"videogame": [str(text_input)], "release date": [info[2]],
-                    "publisher": [info[3]], "genre": [info[1]], "developer": [(', '.join(info[0]))]}
-                st.table(d)
+                try:
+                    info = video_game.get_info()
+                    d = {"videogame": [str(text_input)], "release date": [info[2]],
+                        "publisher": [info[3]], "genre": [info[1]], "developer": [(', '.join(info[0]))]}
+                    st.table(d)
+                except:
+                    st.write("try again if you keep getting this error leave a comment")
         if search_for=="Movie":
             text_input = st.text_input("enter movie, enter exact movie, don't enter star wars for example")
             if text_input=="":
